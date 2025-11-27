@@ -4,23 +4,16 @@ import fetch from "node-fetch";
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-// === ОБНОВИ ТОЛЬКО ЭТУ СТРОКУ ДЛЯ НУЖНОГО КАНАЛА ===
-const ECB_CHANNEL_ID = "UCfHZLan2yRU5fP5l1EzC1Vg";
+// === ПРАВИЛЬНЫЙ channel_id Европейского Центробанка ===
+const ECB_CHANNEL_ID = "UCbA3DQ-d6W4YTcBqzR0jJWA";
 
-// ———————————————————————————————————————————————
-// Главная: проверка, что сервис работает
-// ———————————————————————————————————————————————
 app.get("/", (req, res) => {
   res.send("YouTube Proxy is running");
 });
 
-// ———————————————————————————————————————————————
-// Основной прокси для YouTube RSS
-// ———————————————————————————————————————————————
 app.get("/:channel", async (req, res) => {
   const channelParam = req.params.channel;
 
-  // Если заходят по /ecb → используем заранее записанный канал
   const channelId =
     channelParam === "ecb" ? ECB_CHANNEL_ID : channelParam;
 
@@ -35,7 +28,6 @@ app.get("/:channel", async (req, res) => {
 
     const xml = await response.text();
 
-    // Правильные заголовки, чтобы Make не ругался
     res.set("Content-Type", "application/xml; charset=utf-8");
     res.send(xml);
   } catch (error) {
@@ -43,9 +35,6 @@ app.get("/:channel", async (req, res) => {
   }
 });
 
-// ———————————————————————————————————————————————
-// Запуск сервера
-// ———————————————————————————————————————————————
 app.listen(PORT, () => {
   console.log(`Proxy running on port ${PORT}`);
 });
