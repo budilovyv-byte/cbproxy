@@ -46,4 +46,6 @@ app.get("/:channel", async (req, res) => {
 // ———————————————————————————————————————————————
 // Запуск сервера
 // ———————————————————————————————————————————————
-app.listen
+app.listen(PORT, () => {
+  console.log(`Proxy running on port ${PORT}`);
+});
