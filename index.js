@@ -5,7 +5,7 @@ const app = express();
 const PORT = process.env.PORT || 10000;
 
 // === ПРАВИЛЬНЫЙ channel_id Европейского Центробанка ===
-const ECB_CHANNEL_ID = "UCbA3DQ-d6W4YTcBqzR0jJWA";
+const ECB_CHANNEL_ID = "UCXB8fM4VyQubRu3UVGhd3wA";
 
 app.get("/", (req, res) => {
   res.send("YouTube Proxy is running");
